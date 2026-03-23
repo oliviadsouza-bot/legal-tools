@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Journey — SMS Sales &amp; Support Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F5F4F0;color:#1a1a18;min-height:100vh;padding:24px 16px}
+.container{max-width:800px;margin:0 auto}
+.hero{background:#1F1F1F;border-radius:12px;padding:22px 24px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hero-title{font-size:20px;font-weight:600;color:white;margin-bottom:3px}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.45)}
+.hero-badge{background:#FF6B4A;color:white;font-size:11px;font-weight:600;padding:6px 14px;border-radius:20px;white-space:nowrap}
+.tabs{display:flex;gap:0;border-bottom:1px solid #e0ded7;margin-bottom:18px}
+.tab{padding:10px 18px;font-size:13px;cursor:pointer;border:none;background:none;color:#888;border-bottom:2px solid transparent;transition:all .15s;font-family:inherit}
+.tab.active{color:#FF6B4A;border-bottom-color:#FF6B4A;font-weight:500}
+.tab:hover:not(.active){color:#1a1a18}
+.light-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.light-card{border-radius:12px;padding:18px 16px}
+.light-card.red{background:#FCEBEB;border:1px solid #F09595}
+.light-card.amber{background:#FAEEDA;border:1px solid #FAC775}
+.light-card.green{background:#EAF3DE;border:1px solid #C0DD97}
+.light-dot{width:14px;height:14px;border-radius:50%;margin-bottom:10px}
+.light-card.red .light-dot{background:#E24B4A}
+.light-card.amber .light-dot{background:#EF9F27}
+.light-card.green .light-dot{background:#639922}
+.light-heading{font-size:14px;font-weight:600;margin-bottom:6px}
+.light-card.red .light-heading{color:#791F1F}
+.light-card.amber .light-heading{color:#633806}
+.light-card.green .light-heading{color:#27500A}
+.light-sub{font-size:12px;line-height:1.5;margin-bottom:10px}
+.light-card.red .light-sub{color:#A32D2D}
+.light-card.amber .light-sub{color:#854F0B}
+.light-card.green .light-sub{color:#3B6D11}
+.light-states{font-size:11px;font-weight:600;opacity:.7}
+.light-card.red .light-states{color:#791F1F}
+.light-card.amber .light-states{color:#633806}
+.light-card.green .light-states{color:#27500A}
+.dodont-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.dodont-card{border-radius:12px;border:1px solid #e0ded7;overflow:hidden}
+.dodont-header{padding:12px 16px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dodont-card.do .dodont-header{background:#EAF3DE;color:#27500A;border-bottom:1px solid #C0DD97}
+.dodont-card.dont .dodont-header{background:#FCEBEB;color:#791F1F;border-bottom:1px solid #F09595}
+.dodont-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.dodont-card.do .dodont-icon{background:#639922;color:white}
+.dodont-card.dont .dodont-icon{background:#E24B4A;color:white}
+.dodont-list{padding:12px 16px;background:white}
+.dodont-item{font-size:13px;color:#555;padding:7px 0;border-bottom:1px solid #f0efe9;line-height:1.45;display:flex;gap:8px;align-items:flex-start}
+.dodont-item:last-child{border-bottom:none}
+.dodont-card.do .dodont-item::before{content:"✓";color:#639922;font-weight:700;flex-shrink:0;margin-top:1px;font-size:11px}
+.dodont-card.dont .dodont-item::before{content:"✕";color:#E24B4A;font-weight:700;flex-shrink:0;margin-top:1px;font-size:11px}
+.escalate-box{background:#FAECE7;border:1px solid #F5C4B3;border-radius:12px;padding:16px 18px;margin-bottom:18px}
+.escalate-title{font-size:12px;font-weight:600;color:#993C1D;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.escalate-list{display:flex;flex-direction:column;gap:6px}
+.escalate-item{font-size:13px;color:#993C1D;display:flex;gap:8px;align-items:flex-start}
+.escalate-item::before{content:"→";flex-shrink:0;font-weight:600}
+.intro-box{font-size:14px;color:#555;line-height:1.7;margin-bottom:18px;padding:14px 16px;background:white;border-radius:10px;border:1px solid #e8e6e0}
+.section-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;font-weight:600;margin-bottom:10px}
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-item{border:1px solid #e0ded7;border-radius:12px;overflow:hidden;background:white}
+.faq-q{padding:14px 16px;font-size:13px;font-weight:500;color:#1a1a18;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+.faq-q:hover{background:#faf9f6}
+.faq-chevron{font-size:10px;color:#aaa;flex-shrink:0;transition:transform .15s;display:inline-block}
+.faq-chevron.open{transform:rotate(90deg)}
+.faq-a{padding:0 16px 14px;font-size:13px;color:#555;line-height:1.65;border-top:1px solid #f0efe9}
+.faq-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.faq-tag.warn{background:#FAEEDA;color:#854F0B}
+.faq-tag.info{background:#E6F1FB;color:#185FA5}
+.faq-tag.danger{background:#FCEBEB;color:#A32D2D}
+.faq-tag.ok{background:#EAF3DE;color:#3B6D11}
+.script-grid{display:flex;flex-direction:column;gap:12px}
+.script-card{border:1px solid #e0ded7;border-radius:12px;background:white;overflow:hidden}
+.script-header{padding:12px 16px;border-bottom:1px solid #f0efe9;background:#f8f7f4}
+.script-scenario{font-size:12px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.04em}
+.script-body{padding:14px 16px}
+.script-label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;margin-bottom:6px;font-weight:600}
+.script-text{font-size:13px;color:#555;line-height:1.6;background:#f8f7f4;border-radius:8px;padding:12px 14px;margin-bottom:12px;border-left:2px solid #FF6B4A;font-style:italic}
+.script-tip{font-size:12px;color:#aaa;display:flex;gap:6px;align-items:flex-start}
+.checklist-section{margin-bottom:20px}
+.checklist-section-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#aaa;margin-bottom:10px}
+.checklist-wrap{border:1px solid #e0ded7;border-radius:12px;overflow:hidden;background:white}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid #f0efe9}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border-radius:4px;border:1px solid #d0cec7;background:white;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all .1s}
+.check-box.done{background:#FF6B4A;border-color:#FF6B4A;color:white}
+.check-text{font-size:13px;line-height:1.45}
+.check-sub{font-size:11px;color:#aaa;margin-top:3px}
+@media(max-width:600px){.light-grid{grid-template-columns:1fr}.dodont-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div>
+      <div class="hero-title">AI Journey SMS — Sales &amp; Support Guide</div>
+      <div class="hero-sub">Plain-language guide to SMS compliance. For full legal detail, see the Legal team playbook.</div>
+    </div>
+    <div class="hero-badge">Internal use only</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview',this)">Overview</button>
+    <button class="tab" onclick="switchTab('faq',this)">FAQ</button>
+    <button class="tab" onclick="switchTab('scripts',this)">Talking points</button>
+    <button class="tab" onclick="switchTab('consent',this)">Consent checklist</button>
+  </div>
+
+  <div id="tab-overview">
+    <div class="section-label">The core idea in plain English</div>
+    <div class="intro-box">
+      AI Journey sends abandoned cart and marketing texts on behalf of our merchants. We rely on the merchant to get proper consent from their customers before we send anything. That means <strong>the merchant is responsible for collecting consent correctly</strong> — but <strong>we are also on the hook</strong> if we send texts to people who haven't properly agreed to receive them. Different states and provinces have different rules, and some are strict enough that we need to take extra steps before enabling a merchant.
+    </div>
+
+    <div class="section-label">States and provinces — at a glance</div>
+    <div class="light-grid">
+      <div class="light-card red">
+        <div class="light-dot"></div>
+        <div class="light-heading">Extra care required</div>
+        <div class="light-sub">Special laws beyond federal rules. Higher risk of fines or lawsuits — for us and the merchant.</div>
+        <div class="light-states">Florida · Oklahoma · Quebec</div>
+      </div>
+      <div class="light-card amber">
+        <div class="light-dot"></div>
+        <div class="light-heading">Elevated risk</div>
+        <div class="light-sub">State-specific rules or active enforcement. More than just federal rules apply.</div>
+        <div class="light-states">Washington · Texas · New York · Maryland · North Carolina + others</div>
+      </div>
+      <div class="light-card green">
+        <div class="light-dot"></div>
+        <div class="light-heading">Standard rules apply</div>
+        <div class="light-sub">Federal rules (TCPA in the US, CASL in Canada) apply. Standard merchant consent flow is sufficient.</div>
+        <div class="light-states">Most US states and Canadian provinces</div>
+      </div>
+    </div>
+
+    <div class="section-label">What we need from every merchant — always</div>
+    <div class="dodont-grid">
+      <div class="dodont-card do">
+        <div class="dodont-header"><div class="dodont-icon">✓</div>What merchants must do</div>
+        <div class="dodont-list">
+          <div class="dodont-item">Have a working opt-in checkbox on their checkout or signup form — separate from their terms and conditions</div>
+          <div class="dodont-item">Only send to customers who checked that box</div>
+          <div class="dodont-item">Honor every STOP/unsubscribe request immediately</div>
+          <div class="dodont-item">Keep a record of who consented and when</div>
+          <div class="dodont-item">Make sure their privacy policy mentions SMS marketing</div>
+        </div>
+      </div>
+      <div class="dodont-card dont">
+        <div class="dodont-header"><div class="dodont-icon">✕</div>What merchants cannot do</div>
+        <div class="dodont-list">
+          <div class="dodont-item">Send to a contact list purchased from a third party or lead-gen service</div>
+          <div class="dodont-item">Assume consent from a past purchase alone — they need an explicit opt-in for marketing texts</div>
+          <div class="dodont-item">Send between 9pm–8am in the recipient's local time (some states are even stricter)</div>
+          <div class="dodont-item">Continue texting anyone who has replied STOP</div>
+          <div class="dodont-item">Use pre-checked boxes or consent bundled into terms and conditions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="escalate-box">
+      <div class="escalate-title">Always escalate to Legal before enabling AI Journey for these situations</div>
+      <div class="escalate-list">
+        <div class="escalate-item">Merchant is based in or has customers in Florida or Oklahoma — we need to review their consent form first</div>
+        <div class="escalate-item">Merchant sells into Quebec, Canada — French-language consent and stricter rules apply</div>
+        <div class="escalate-item">Merchant has purchased their contact list or uses a lead-gen service to collect numbers</div>
+        <div class="escalate-item">Merchant can't explain how their customers opted in to receive SMS</div>
+        <div class="escalate-item">Merchant has received a cease-and-desist, demand letter, or complaint related to SMS</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-faq" style="display:none">
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+
+  <div id="tab-scripts" style="display:none">
+    <div class="script-grid" id="script-grid"></div>
+  </div>
+
+  <div id="tab-consent" style="display:none">
+    <div style="font-size:13px;color:#555;margin-bottom:16px;line-height:1.6">Use this checklist when a merchant asks about setting up AI Journey. Every item needs a "yes" before we enable the feature. If anything is unclear or a "no" — loop in Legal.</div>
+    <div id="consent-checklist"></div>
+    <div style="margin-top:16px;font-size:12px;color:#aaa;border-top:1px solid #e0ded7;padding-top:12px">Not sure about any item? Reach out to the Legal team before enabling. It's always easier to ask first than to fix a problem later.</div>
+  </div>
+</div>
+
+<script>
+const faqs=[{q:"A merchant wants to use AI Journey. What's the first thing I should ask them?",tag:"info",tagLabel:"Sales",a:"Ask how they collect consent for SMS. They should have a standalone opt-in checkbox — not buried in their terms and conditions — that specifically says something like 'Text me about my order and special offers.' If they can't describe their consent process clearly, that's a flag. Loop in Legal before enabling."},{q:"A merchant says their customers 'agreed to terms' or 'purchased before.' Is that good enough?",tag:"danger",tagLabel:"Watch out",a:"No. A past purchase or generic terms agreement does not equal consent to receive marketing texts. The merchant needs an explicit, separate checkbox or opt-in at the point of signup or checkout. If they only have terms consent or a purchase history, we should not enable AI Journey until they fix their opt-in flow."},{q:"Can we enable AI Journey for a merchant in Florida?",tag:"warn",tagLabel:"Escalate",a:"Not without Legal review first. Florida has one of the strictest SMS laws in the country. Their consent form needs to specifically name the merchant — a generic 'receive marketing messages' box may not be enough. Flag this to Legal and they'll do a quick consent flow review before we turn it on."},{q:"A merchant's customers are in Canada. Does that change anything?",tag:"warn",tagLabel:"Canada",a:"Yes. Canadian rules (called CASL) are different from US rules. Consent is required before sending, and every text must include the merchant's name and a way to unsubscribe. For Quebec specifically, consent must be in French and is subject to additional requirements. Flag Canadian merchants to Legal during onboarding."},{q:"A merchant says their customers can unsubscribe 'at any time.' Is that sufficient?",tag:"info",tagLabel:"Good start",a:"It's the right idea but not just about the message — they also need to actually process opt-outs quickly (within 10 business days under federal law, but ideally right away). The STOP keyword should work, and once someone says stop, they can never be contacted again through AI Journey unless they explicitly re-consent."},{q:"A merchant bought a list of phone numbers from a marketing agency. Can we use that?",tag:"danger",tagLabel:"No",a:"Absolutely not. We should never enable AI Journey for a purchased contact list. People on those lists did not consent to receive texts from that specific merchant. This is one of the clearest ways to rack up large fines and lawsuits. This is a firm no — escalate to Legal if a merchant pushes back."},{q:"Can AI Journey texts go out any time of day?",tag:"info",tagLabel:"Operations",a:"No. Texts can only go out between 8am and 9pm in the recipient's local time under federal rules. Maryland limits it to 8pm, and Texas starts at 9am. AI Journey applies time-of-day restrictions automatically based on the recipient's number, but it's worth knowing this when setting merchant expectations around send timing."},{q:"A merchant is getting complaints that customers 'never signed up.' What should I do?",tag:"danger",tagLabel:"Escalate now",a:"This is a high-priority escalation to Legal immediately. Do not try to resolve consent disputes at the support level. Pause AI Journey sends for that merchant if possible while Legal reviews. Document everything the merchant tells you about how they collected consent."},{q:"What exactly does Gorgias promise merchants about compliance?",tag:"info",tagLabel:"Sales",a:"We provide the sending platform and apply basic safeguards (time-of-day restrictions, opt-out processing). We do not verify that the merchant's consent is legally valid — that's the merchant's responsibility. Our merchant agreement says so. Be careful not to promise merchants that using AI Journey makes them 'fully compliant' — we're a tool, not a legal sign-off."},{q:"A merchant asks if they need a privacy policy. What do I say?",tag:"info",tagLabel:"Sales",a:"Yes, they should have one, and it should mention that they may send marketing text messages. Several state privacy laws require this disclosure. We're not in a position to give merchants legal advice on their own policies, but we can point them to Legal or suggest they consult their own counsel if they don't have one."}];
+
+const scripts=[{scenario:"Merchant asks why we need to review their consent form before enabling AI Journey",sayThis:"'AI Journey sends texts on behalf of your store, and the rules around marketing texts are pretty strict — especially in certain states like Florida. We're not doubting your setup, we just want to make sure we tick all the boxes together before we turn it on. Our legal team will just take a quick look at how your opt-in is structured. It usually takes a day or two and it protects both of us.'",tip:"Lead with partnership, not compliance. Merchants don't want to feel accused of doing something wrong — frame it as a joint step."},{scenario:"Merchant says 'other SMS platforms don't ask for this'",sayThis:"'Different platforms have different risk tolerances. We take this seriously because the fines and lawsuits in this space can be significant — and they can land on us and on you. We'd rather spend a day on a quick review than have either of us dealing with a legal issue down the line.'",tip:"Don't throw competitors under the bus. Just explain our position calmly."},{scenario:"Merchant in Florida is frustrated about the extra steps",sayThis:"'I completely understand the frustration — Florida actually has one of the strictest SMS laws in the country, and there have been a lot of lawsuits there recently, even against well-intentioned businesses. The extra check is genuinely for your protection as much as ours. The good news is, if your consent form is solid, this should be quick.'",tip:"Florida is worth naming specifically — it helps merchants understand this isn't arbitrary."},{scenario:"Merchant can't describe how their customers opted in",sayThis:"'No problem, let's figure it out together. Can you show me the checkout page or signup form your customers fill out? We're looking for a checkbox that specifically mentions text messages — separate from your terms and conditions. If you have that, we're in good shape.'",tip:"Don't just ask 'do you have consent' — ask to see it. Merchants often think they have it when they don't."},{scenario:"Support: Customer complains they never signed up for texts from a merchant",sayThis:"'Thanks for flagging this — I'm sorry you received a text you didn't expect. I'm going to escalate this internally to our compliance team right away. Can you tell me the phone number the text came from and roughly when you received it? We take this seriously and I want to make sure we look into it properly.'",tip:"Don't speculate on whether there was a consent issue. Collect info, escalate to Legal, don't promise outcomes."}];
+
+const checklist=[{section:"Merchant opt-in setup",items:[{text:"Merchant has a standalone SMS opt-in checkbox on their checkout or signup form",sub:"Not buried in T&Cs. Specifically mentions 'text messages' or 'SMS.'"},{text:"The checkbox is not pre-checked by default",sub:"The customer has to actively choose to check it."},{text:"The opt-in language names the merchant specifically",sub:"Critical for Florida and Oklahoma. Vague 'receive marketing messages' may not be enough."},{text:"Merchant can show me where this opt-in lives on their site",sub:"Ask to see it or have them share a screenshot."}]},{section:"Audience and list quality",items:[{text:"The send list came entirely from the merchant's own customers who opted in",sub:"No purchased lists, no third-party lead-gen lists, no scraped data."},{text:"Merchant has not previously had complaints about consent for SMS",sub:"If they've had issues before, escalate to Legal."},{text:"Merchant understands that existing customers are not automatically opted in for marketing texts",sub:"A past purchase alone is not consent for marketing SMS."}]},{section:"Ongoing operations",items:[{text:"Merchant has a process for handling STOP replies immediately",sub:"Customers who reply STOP must never receive another message from this merchant."},{text:"Merchant has a privacy policy that mentions SMS marketing",sub:"Most privacy laws require this disclosure."},{text:"For Florida or Oklahoma merchants: Legal has reviewed and approved the consent form",sub:"Do not enable AI Journey without Legal sign-off for these states."},{text:"For Canadian merchants: Legal has reviewed for CASL compliance",sub:"CASL has different consent rules. Quebec adds French-language requirements."}]}];
+
+let openFaq=null,checkedItems={};
+function switchTab(t,el){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');['overview','faq','scripts','consent'].forEach(x=>{document.getElementById('tab-'+x).style.display=x===t?'block':'none';});}
+function renderFaq(){const list=document.getElementById('faq-list');list.innerHTML='';faqs.forEach((f,i)=>{const isO=openFaq===i,d=document.createElement('div');d.className='faq-item';const tc=f.tag==='danger'?'danger':f.tag==='warn'?'warn':f.tag==='ok'?'ok':'info';d.innerHTML=`<div class="faq-q" onclick="toggleFaq(${i})"><span><span class="faq-tag ${tc}">${f.tagLabel}</span>${f.q}</span><span class="faq-chevron ${isO?'open':''}">▶</span></div>${isO?`<div class="faq-a">${f.a}</div>`:''}`;list.appendChild(d);});}
+function toggleFaq(i){openFaq=openFaq===i?null:i;renderFaq();}
+function renderScripts(){const grid=document.getElementById('script-grid');grid.innerHTML='';scripts.forEach(s=>{const d=document.createElement('div');d.className='script-card';d.innerHTML=`<div class="script-header"><div class="script-scenario">${s.scenario}</div></div><div class="script-body"><div class="script-label">Say this</div><div class="script-text">${s.sayThis}</div><div class="script-tip"><span>💡</span>${s.tip}</div></div>`;grid.appendChild(d);});}
+function renderChecklist(){const c=document.getElementById('consent-checklist');c.innerHTML='';checklist.forEach((sec,si)=>{const sd=document.createElement('div');sd.className='checklist-section';sd.innerHTML=`<div class="checklist-section-title">${sec.section}</div>`;const wrap=document.createElement('div');wrap.className='checklist-wrap';sec.items.forEach((item,ii)=>{const key=`${si}-${ii}`,ic=checkedItems[key],row=document.createElement('div');row.className='check-item';const cb=document.createElement('div');cb.className=`check-box ${ic?'done':''}`;cb.textContent=ic?'✓':'';cb.onclick=()=>{checkedItems[key]=!checkedItems[key];renderChecklist();};const ct=document.createElement('div');ct.innerHTML=`<div class="check-text" style="color:${ic?'#aaa':'#1a1a18'};text-decoration:${ic?'line-through':'none'}">${item.text}</div><div class="check-sub">${item.sub}</div>`;row.appendChild(cb);row.appendChild(ct);wrap.appendChild(row);});sd.appendChild(wrap);c.appendChild(sd);});}
+renderFaq();renderScripts();renderChecklist();
+</script>
+</body>
+</html>
